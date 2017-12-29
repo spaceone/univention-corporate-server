@@ -1,3 +1,9 @@
+ucs-test (8.1.16-3) unstable; urgency=medium
+
+  * Bug #45842: add pseduo changelog entries
+
+ -- Florian Best <best@univention.de>  Wed, 10 Jan 2018 18:46:17 +0100
+
 ucs-test (8.0.16-3) unstable; urgency=medium
 
   * Bug #36480: skip 502_other_attribute_sync.py
