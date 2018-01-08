@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: univention-management-console-module-services\n"
 "Report-Msgid-Bugs-To: packages@univention.de\n"
-"POT-Creation-Date: 2017-07-03 14:14+0200\n"
+"POT-Creation-Date: 2018-01-08 12:11+0100\n"
 "PO-Revision-Date: 2016-01-14 11:26+0100\n"
 "Last-Translator: Univention GmbH <packages@univention.de>\n"
 "Language-Team: Univention GmbH <packages@univention.de>\n"
@@ -12,11 +12,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: umc/js/services.js:231
+msgid " (Warning: Stopping this service will interrupt all current connections to the Univention Management Console)"
+msgstr " (Warnung: Das Stoppen dieses Dienstes unterbricht alle bestehenden Verbindungen zu der Univention Management Console)"
+
 #: umc/js/services.js:171
 msgid "Automatically"
 msgstr "Automatisch"
 
-#: umc/js/services.js:241
+#: umc/js/services.js:239
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -36,7 +40,7 @@ msgstr "Name"
 msgid "Never"
 msgstr "Nie"
 
-#: umc/js/services.js:233
+#: umc/js/services.js:241
 msgid "OK"
 msgstr "OK"
 

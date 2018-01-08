@@ -1,3 +1,9 @@
+univention-management-console-module-services (6.0.0-7) unstable; urgency=medium
+
+  * Bug #26477: warn when stopping module breaks UMC
+
+ -- Jannik Ahlers <ahlers@univention.de>  Mon, 08 Jan 2018 11:08:36 +0100
+
 univention-management-console-module-services (6.0.0-6) unstable; urgency=medium
 
   * Bug #43999: Adjust styling of dialogs
