@@ -227,7 +227,7 @@ class Migration(object):
 					('homeDirectory', [], ['/home/%s' % (user['uid'][0],)]),  # TODO: can this default value be overwritten by UCR?
 				])
 
-			if not has_shadow or not has_posix and not user.get('userPassword'):
+			if (not has_shadow or not has_posix) and not user.get('userPassword'):
 				ml.append(('userPassword', [], ['{K5KEY}' if user.get('krb5Key') else '{KINIT}']))
 
 			if not has_shadow:
