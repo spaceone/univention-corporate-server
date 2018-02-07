@@ -161,7 +161,7 @@ class Migration(object):
 					disabled = univention.admin.password.is_locked(user.get('userPassword', [''])[0])
 			password_set_date = None
 			if user.get('krb5PasswordEnd', [None][0]):
-				password_set_date = time.strptime(user['krb5PasswordEnd'][0], "%Y%m%d000000Z")
+				password_set_date = time.strptime(user['krb5PasswordEnd'][0], "%Y%m%d%H%M%SZ")
 			elif user.get('sambaPwdLastSet', [None])[0]:
 				try:
 					password_set_date = time.gmtime(int(user['sambaPwdLastSet'][0]))
@@ -169,7 +169,7 @@ class Migration(object):
 					pass
 			if not password_set_date and user.get('shadowLastChange', [None])[0]:
 				try:
-					password_set_date = time.gmtime(int(user['shadowLastChange'][0]) * 3600 * 24)
+					password_set_date = time.gmtime(int(user['shadowLastChange'][0]) * 3600 * 24 + int(user.get('shadowMax', [0])[0]))
 				except ValueError:
 					pass
 
@@ -211,13 +211,13 @@ class Migration(object):
 				])
 
 				if kickoff_time:
-					ml.append(('krb5ValidEnd', [], [time.strftime("%Y%m%d000000Z", kickoff_time)]))
+					ml.append(('krb5ValidEnd', [], [time.strftime("%Y%m%d%H%M%SZ", kickoff_time)]))
 
 				if user.get('sambaNTPassword', [None])[0]:
 					ml.append(('krb5Key', [], self.nt_password_to_arcfour_hmac_md5(user['sambaNTPassword'][0])))
 
 				if password_set_date:
-					ml.append(('krb5PasswordEnd', [], [time.strftime("%Y%m%d000000Z", password_set_date)]))
+					ml.append(('krb5PasswordEnd', [], [time.strftime("%Y%m%d%H%M%SZ", password_set_date)]))
 
 			if not has_posix:
 				uidNumber = self.allocate('uidNumber')
@@ -238,7 +238,8 @@ class Migration(object):
 					ml.append(('shadowExpire', [], ['1']))
 
 				if password_set_date:
-					ml.append(('shadowLastChange', [], [str(int(time.strftime('%s', password_set_date)) / 3600 / 24)]))
+					ml.append(('shadowLastChange', [], [str(int(time.strftime('%s', password_set_date)) / 3600 / 24 - 1)]))
+					ml.append(('shadowMax', [], ['1']))
 
 			if not has_samba:
 				# FIXME: 'sambaNTPassword' if no kerberos user!
