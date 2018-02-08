@@ -160,10 +160,12 @@ layout = [
 	]),
 ]
 
+
 def unmapLocked(oldattr):
 	if isLDAPLocked(oldattr):
 		return '1'
 	return '0'
+
 
 def isLDAPLocked(oldattr):
 	return bool(oldattr.get('pwdAccountLockedTime', [''])[0])
@@ -177,6 +179,7 @@ mapping.register('description', 'description', None, univention.admin.mapping.Li
 mapping.register('password', 'userPassword', None, univention.admin.mapping.ListToString)
 
 mapping.registerUnmapping('locked', unmapLocked)
+
 
 class object(univention.admin.handlers.simpleLdap):
 	module = module
